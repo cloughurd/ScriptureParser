@@ -25,23 +25,34 @@ def run(vol_name):
     volume = {}
     volume_verse_count = 0
     volume_word_count = 0
-    with open('lds-scriptures.json', 'r') as f:
+    # vol_name_list = []
+    with open('lds-scriptures.json') as f:
+        line_num = 0
         for line in f:
-            verse = json.loads(line)
-            if verse['volume_lds_url'] == vol_name or verse['volume_title']:
-                volume_verse_count += 1
-                book_name = verse['book_title']
-                if book_name not in volume:
-                    volume[book_name] = {}
-                book = volume[book_name]
-                chapter_number = verse['chapter_number']
-                if chapter_number not in book:
-                    book[chapter_number] = {}
-                chapter = book[chapter_number]
-                verse_number = verse['verse_number']
-                text = verse['scripture_text']
-                chapter[verse_number] = text
-                volume_word_count += len(text.split())
+            line_num += 1
+            try:
+                line = line.replace('\\"', '\"')
+                verse = json.loads(line)
+                # if verse['volume_lds_url'] not in vol_name_list:
+                #     vol_name_list.append(verse['volume_lds_url'])
+                if verse['volume_lds_url'] == vol_name or verse['volume_title'] == vol_name:
+                    volume_verse_count += 1
+                    book_name = verse['book_title']
+                    if book_name not in volume:
+                        volume[book_name] = {}
+                    book = volume[book_name]
+                    chapter_number = verse['chapter_number']
+                    if chapter_number not in book:
+                        book[chapter_number] = {}
+                    chapter = book[chapter_number]
+                    verse_number = verse['verse_number']
+                    text = verse['scripture_text']
+                    chapter[verse_number] = text
+                    volume_word_count += len(text.split())
+            except json.decoder.JSONDecodeError as e:
+                print('Error on line {}'.format(line_num))
+                print(line)
+                print(e)
     meta = {
         'word_count': volume_word_count,
         'verse_count': volume_verse_count
@@ -54,5 +65,5 @@ if __name__ == '__main__':
     try:
         vol_name = sys.argv[1]
     except IndexError:
-        vol_name = 'bom'
+        vol_name = 'bm'
     run(vol_name)
