@@ -1,10 +1,15 @@
 from field_extractor import extract_verse
 import json
 import pandas as pd
+from nltk.stem import PorterStemmer
 
 def get_word(volume_name, word):
     volume = json.load(open(volume_name + '_wf.json', 'r'))
-    return volume.get(word, 0)
+    res = volume.get(word, 0)
+    if res == 0:
+        stemmer = PorterStemmer()
+        res = volume.get(stemmer.stem(word), 0)
+    return res
 
 def extend_df(df, word):
     volumes = ['ot','nt','bm','dc','pgp']

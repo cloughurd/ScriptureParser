@@ -16,7 +16,7 @@ def run(vol_name):
     stop_words = set(stopwords.words('english'))
     stemmer = PorterStemmer()
     num_good_words = 0
-    godly_titles = ['god','lord','jesu','christ','father']
+    godly_titles = ['god','lord','jesus','christ','father']
     godly_adjectives = {}
     for book_name, book in volume.items():
         if book_name == 'meta':
