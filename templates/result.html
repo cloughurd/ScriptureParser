@@ -1,19 +1,7 @@
-<!DOCTYPE html>
-<html>
-    <body>
-        <h1>Enter Your Search Term Below</h1>
-
-        {% from "_formhelpers.html" import render_field %}
-        <form method=post>
-            <dl>
-                {{ render_field(form.select) }}
-                <p>
-                {{ render_field(form.search) }}
-            </dl>
-            <p><input type=submit value=Search>
-        </form>
-
-        <h1>Search Result</h1>
+{% extends "layout.html" %}
+{% block content %}
+  <div class="search">
+        <h2>Search Result</h2>
         <img src="{{ result_graph }}" alt="Result Graph for User Search">
-    </body>
-</html>
+  </div>
+{% endblock %}

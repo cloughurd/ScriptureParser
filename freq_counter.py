@@ -21,8 +21,8 @@ def run(vol_name):
     for book_name, book in volume.items():
         if book_name == 'meta':
             continue
-        for chapter_num, chapter in book.items():
-            for verse_num, verse in chapter.items():
+        for _, chapter in book.items():
+            for _, verse in chapter.items():
                 word_list = verse.lower().translate(trans_table).split()
                 for idx, word in enumerate(word_list):
                     if word not in stop_words:

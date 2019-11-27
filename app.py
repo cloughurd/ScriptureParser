@@ -10,10 +10,8 @@ VISUALS_FOLDER = os.path.join('static', 'visuals')
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = VISUALS_FOLDER
 
-result_param_name = 'result'
-
 @app.route('/', methods=['GET','POST'])
-def index():
+def home():
     search = TermSearchForm(request.form)
     if request.method == 'POST':
         search_term = search.data['search']
@@ -21,7 +19,29 @@ def index():
         by_verse = select_choice == 'By Verses'
         res = make_visualization(search_term, by_verse)
         return redirect(url_for('result', res=res))
-    return render_template('index.html', form=search)
+    return render_template('home.html', form=search)
+
+@app.route('/atonement', methods=['GET','POST'])
+def atonement():
+    search = TermSearchForm(request.form)
+    if request.method == 'POST':
+        search_term = search.data['search']
+        select_choice = search.data['select']
+        by_verse = select_choice == 'By Verses'
+        res = make_visualization(search_term, by_verse)
+        return redirect(url_for('result', res=res))
+    return render_template('atonement.html', form=search)
+
+@app.route('/titles', methods=['GET','POST'])
+def titles():
+    search = TermSearchForm(request.form)
+    if request.method == 'POST':
+        search_term = search.data['search']
+        select_choice = search.data['select']
+        by_verse = select_choice == 'By Verses'
+        res = make_visualization(search_term, by_verse)
+        return redirect(url_for('result', res=res))
+    return render_template('titles.html', form=search)
 
 @app.route('/result', methods=['GET','POST'])
 def result():

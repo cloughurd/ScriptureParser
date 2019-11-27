@@ -9,8 +9,10 @@ visualizations_folder = 'static/visuals/'
 
 def make_visualization(term: str, per_verse=True):
     term = term.lower()
+    term = term.split()[0]
+    term = term.strip()
     filename = term + '-{}.jpg'
-    title = 'Percent of {measurement} that Mention {term} by Volume'
+    title = '{term} (by {measurement})'
     if per_verse:
         title = title.format(measurement='Verses', term=term.title())
         filename = filename.format('v')
@@ -41,7 +43,7 @@ def make_visualization(term: str, per_verse=True):
     tick_label = [i[0] for i in info]
     plt.bar(x=x, height=h, tick_label=tick_label)
     plt.title(title)
-    plt.xlabel('Volume')
+    plt.xlabel('Book of Scripture')
     plt.ylabel('Percent %')
     plt.savefig(visualizations_folder + filename)
     plt.close()

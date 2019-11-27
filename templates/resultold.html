@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
     <body>
-        <h1>Enter Your Search Term Below</h1>
+        <a href="templates/index.html">Home</a>
+        <a href="templates/search.html">Search</a>
+        <h1>Enter The Word You Would Like To Search Below</h1>
 
         {% from "_formhelpers.html" import render_field %}
         <form method=post>
@@ -13,5 +15,7 @@
             <p><input type=submit value=Search>
         </form>
 
+        <h1>Search Result</h1>
+        <img src="{{ result_graph }}" alt="Result Graph for User Search">
     </body>
 </html>
