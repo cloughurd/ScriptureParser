@@ -9,11 +9,14 @@
             <li><a href="{{ url_for('home') }}">Home</a></li>
             <li><a href="{{ url_for('atonement') }}">Atonement</a></li>
             <li><a href="{{ url_for('titles') }}">Godly Titles</a></li>
+            <li><a href="{{ url_for('other') }}">Other</a></li>
           </ul>
         </nav></strong>
       </div>
     </header>
     <h2>Enter The Word You Would Like To Search Below</h2>
+    <p>Filler words such as 'the' were not counted</p>
+    <br>
 
     {% from "_formhelpers.html" import render_field %}
     <form method=post>

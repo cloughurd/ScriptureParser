@@ -43,6 +43,17 @@ def titles():
         return redirect(url_for('result', res=res))
     return render_template('titles.html', form=search)
 
+@app.route('/other', methods=['GET','POST'])
+def other():
+    search = TermSearchForm(request.form)
+    if request.method == 'POST':
+        search_term = search.data['search']
+        select_choice = search.data['select']
+        by_verse = select_choice == 'By Verses'
+        res = make_visualization(search_term, by_verse)
+        return redirect(url_for('result', res=res))
+    return render_template('other.html', form=search)
+
 @app.route('/result', methods=['GET','POST'])
 def result():
     search = TermSearchForm(request.form)
